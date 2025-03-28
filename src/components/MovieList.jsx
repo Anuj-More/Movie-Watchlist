@@ -3,9 +3,9 @@ import MovieCard from './MovieCard'
 
 const MovieList = ({ movies }) => {
   return (
-    <ul className="flex flex-wrap gap-[20px] m-3">
+    <ul className="search-result flex flex-wrap gap-[20px] m-3">
       {movies.map(movie => (
-        <MovieCard movie={movie} key={movie.id} />
+        <MovieCard movie={movie} watchList={false} key={movie.id} />
       ))}
     </ul>
   )
