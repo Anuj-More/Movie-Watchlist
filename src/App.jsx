@@ -1,14 +1,17 @@
 import Header from "./components/Header"
 import MovieList from "./components/MovieList"
 import WatchList from "./components/WatchList"
+import { MoviesProvider } from "./contexts/MoviesContext"
 
 function App() {
   return(
-    <div className="flex flex-col gap-2.5">
-      <Header />
-      <MovieList movies={dummyData}/>
-      <WatchList movies={watchList}/>
-    </div>
+    <MoviesProvider>
+      <div className="flex flex-col gap-2.5">
+        <Header />
+        <MovieList movies={dummyData}/>
+        <WatchList movies={watchList}/>
+      </div>
+    </MoviesProvider>
   )
 }
 
