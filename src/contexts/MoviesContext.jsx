@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-const MoviesContext = createContext(null)
-const SetMoviesContext = createContext(null)
+export const MoviesContext = createContext(null)
+export const SetMoviesContext = createContext(null)
 
-const MoviesProvider = ({ children }) => {
+export const MoviesProvider = ({ children }) => {
   const [movies, setMovies] = useState([])
 
   return (
