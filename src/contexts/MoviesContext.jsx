@@ -8,7 +8,7 @@ export const SetWatchlistContext = createContext(null)
 
 export const MoviesProvider = ({ children }) => {
   const [movies, setMovies] = useState([])
-  const [watchlist, setWatchlist] = useState([])  //watchlist will contain the imdbId of the movies wathclisted, and use the movie data from the "movies" array itself
+  const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')) || [])  //watchlist will contain the imdbId of the movies wathclisted, and use the movie data from the "movies" array itself
 
   
 

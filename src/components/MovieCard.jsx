@@ -1,9 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { SetWatchlistContext, WatchlistContext } from '../contexts/MoviesContext'
 
 const MovieCard = ({ movie, isWatchlist }) => {
   const setWatchlist = useContext(SetWatchlistContext)
   const watchlist = useContext(WatchlistContext)
+
+  useEffect(() => {
+    localStorage.setItem('watchlist', JSON.stringify(watchlist))
+  }, [watchlist])
 
 
   if(isWatchlist){

@@ -5,7 +5,7 @@ import { MoviesContext } from '../contexts/MoviesContext'
 const MovieList = () => {
   const movies = useContext(MoviesContext)
 
-  if(movies){
+  if(movies.length > 0){
     return (
       <ul className="search-result flex flex-wrap gap-[20px] m-3">
         {movies.map(movie => (
@@ -15,7 +15,9 @@ const MovieList = () => {
     )
   } else {
     return (
-      <h1>Search for a movie in the search bar.</h1>
+      <div className='m-3 font-bold text-2xl'>  
+        Search for a movie in the search bar.
+      </div>
     )
   }
 }
