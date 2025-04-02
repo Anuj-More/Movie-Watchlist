@@ -13,7 +13,7 @@ const MovieCard = ({ movie, isWatchlist }) => {
     setIsInDetails(true)
     setDetailsLoading(true)
 
-    const API_URL = `https://www.omdbapi.com/?apikey=40524c65&t=${movie.Title}`
+    const API_URL = `https://www.omdbapi.com/?apikey=${import.meta.env.VITE_OMDB_API_KEY}&t=${movie.Title}`
 
     try {
       const response = await fetch(API_URL)

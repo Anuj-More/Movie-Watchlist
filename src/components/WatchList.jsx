@@ -9,7 +9,7 @@ const WatchList = () => {
     return (
       <div className='watch-list m-3'>
         <div className='font-bold mb-3'>Watchlist</div>
-        <ul key={crypto.randomUUID()} className="flex flex-wrap gap-[20px]">
+        <ul className="flex flex-wrap gap-[20px]">
           {watchlist.map(movie => (
             <MovieCard movie={movie} isWatchlist={true} key={movie.imdbID}/>
           ))}

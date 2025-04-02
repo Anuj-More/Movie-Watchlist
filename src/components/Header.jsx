@@ -8,9 +8,10 @@ const Header = () => {
   const [query, setQuery] = useState('')
 
   const searchMovies = async () => {
+    if (!query.trim()) return;
     setLoading('loading')
     
-    const API_URL = `https://www.omdbapi.com/?i=tt3896198&apikey=40524c65&s=${query}`
+    const API_URL = `https://www.omdbapi.com/?i=tt3896198&apikey=${import.meta.env.VITE_OMDB_API_KEY}&s=${query}`
 
     try{
       const response = await fetch(API_URL)
@@ -21,15 +22,12 @@ const Header = () => {
       if(data.Search){
         setMovies(data.Search) 
         setLoading('result')
-      } else if(data.Error === 'Too many results.') {
+      } else {
         setMovies([])
-        setLoading('too-many-results')
-      } else if(data.Error === 'Movie not found!'){ 
-        setMovies([])
-        setLoading('no-result')
+        setLoading(data.Error === 'Too many results.' ? 'too-many-results' : 'no-result');
       }
     } catch (error) {
-      console.log(error)
+      console.error('Error fetching movies:', error);
     }
 
 
@@ -43,16 +41,12 @@ const Header = () => {
           <input 
             type="text" 
             className="border-2 border-gray-600 rounded-lg w-full max-w-30 min-w-2.5"
-            onChange={(e) => {
-              setQuery(e.target.value)
-            }}
+            onChange={(e) => setQuery(e.target.value)}
           />
 
           <button 
             className="font-bold"
-            onClick={() => {
-              searchMovies()
-            }}
+            onClick={searchMovies}
           >
             Search
           </button>

@@ -16,9 +16,4 @@ function App() {
   )
 }
 
-const watchList = [
-  {id:0, poster: 'movie-1', name: 'first', year: '2009'},
-  {id:1, poster: 'movie-2', name: 'second', year: '2010'},
-]
-
 export default App
