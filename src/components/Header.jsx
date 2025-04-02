@@ -1,12 +1,15 @@
 import React, { useContext, useState } from 'react'
-import { MoviesContext, SetMoviesContext } from '../contexts/MoviesContext'
+import { MoviesContext, SetLoadingContext, SetMoviesContext } from '../contexts/MoviesContext'
 
 const Header = () => {
-  const setMovies = useContext(SetMoviesContext)
+  const setMovies = useContext(SetMoviesContext)  
+  const setLoading = useContext(SetLoadingContext)
 
   const [query, setQuery] = useState('')
 
   const searchMovies = async () => {
+    setLoading(true)
+    
     const API_URL = `https://www.omdbapi.com/?i=tt3896198&apikey=40524c65&s=${query}`
 
     try{
@@ -19,6 +22,8 @@ const Header = () => {
     } catch (error) {
       console.log(error)
     }
+
+    setLoading(false)
 
   }
 
