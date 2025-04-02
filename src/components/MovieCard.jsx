@@ -4,11 +4,15 @@ import { SetWatchlistContext, WatchlistContext } from '../contexts/MoviesContext
 const MovieCard = ({ movie, isWatchlist }) => {
   const setWatchlist = useContext(SetWatchlistContext)
   const watchlist = useContext(WatchlistContext)
-  let [movieDetails, setMovieDetails] = useState(null)
-
+  
+  const [detailsLoading, setDetailsLoading] = useState(true)  
+  const [movieDetails, setMovieDetails] = useState(null)
   const [isInDetails, setIsInDetails] = useState(false)
 
   const fetchMovieDetails = async () => {
+    setIsInDetails(true)
+    setDetailsLoading(true)
+
     const API_URL = `https://www.omdbapi.com/?apikey=40524c65&t=${movie.Title}`
 
     try {
@@ -17,16 +21,13 @@ const MovieCard = ({ movie, isWatchlist }) => {
 
       if (data.Response === "True") {
         setMovieDetails(data)
-        setIsInDetails(true) // Show details modal
       }
     } catch (error) {
       console.log("Error fetching movie details:", error)
     }
-  }
 
-  useEffect(() => {
-    console.log(movieDetails)
-  }, [movieDetails])
+    setDetailsLoading(false)
+  }
 
   useEffect(() => {
     localStorage.setItem('watchlist', JSON.stringify(watchlist))
@@ -50,12 +51,13 @@ const MovieCard = ({ movie, isWatchlist }) => {
         </button>
       </li>
     )
-  } else if (isInDetails) {
+  } else if (!detailsLoading && isInDetails) {
     return (
       <li className='border p-4'>
         <img src={movieDetails.Poster} width={250}/>
         <h5 className="w-[250px]">{movieDetails.Title} ({movieDetails.Year})</h5>
-        <h6>Type: {movieDetails.Type} Genre: {movieDetails.Genre}</h6>
+        <h6>Type: {movieDetails.Type}</h6>
+        <div>Genre: {movieDetails.Genre}</div>
         <div>Rating: {movieDetails.imdbRating}</div>
         <button 
           className='border px-2 py-1'
@@ -88,6 +90,13 @@ const MovieCard = ({ movie, isWatchlist }) => {
         </button>
       </li>
     )
+  } else if(isInDetails && detailsLoading) { 
+    return (
+      <li className='border p-4 text-gray-400 font-bold text-xl'>
+        Details Loading...
+      </li>
+    )
+    
   } else {
     return (
       <li className='border p-4'>
@@ -119,7 +128,9 @@ const MovieCard = ({ movie, isWatchlist }) => {
 
           <button 
             className='border px-2 py-1 ml-2'
-            onClick={fetchMovieDetails}
+            onClick={() =>{
+              fetchMovieDetails()
+            }}
           > 
             Details
           </button>

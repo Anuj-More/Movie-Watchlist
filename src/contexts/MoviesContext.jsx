@@ -10,7 +10,7 @@ export const SetLoadingContext = createContext(null)
 
 export const MoviesProvider = ({ children }) => {
   const [movies, setMovies] = useState([])
-  const [loading, setLoading] = useState(true) // Global loading state
+  const [loading, setLoading] = useState(false) // Global loading state
   const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')) || [])  //watchlist will contain the imdbId of the movies wathclisted, and use the movie data from the "movies" array itself
 
   

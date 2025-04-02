@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { MoviesContext, SetLoadingContext, SetMoviesContext } from '../contexts/MoviesContext'
+import { SetLoadingContext, SetMoviesContext } from '../contexts/MoviesContext'
 
 const Header = () => {
   const setMovies = useContext(SetMoviesContext)  
