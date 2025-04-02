@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const MoviesContext = createContext(null)
 export const SetMoviesContext = createContext(null)
@@ -14,6 +14,9 @@ export const MoviesProvider = ({ children }) => {
   const [watchlist, setWatchlist] = useState(JSON.parse(localStorage.getItem('watchlist')) || [])  //watchlist will contain the imdbId of the movies wathclisted, and use the movie data from the "movies" array itself
 
   
+  useEffect(() => {
+    localStorage.setItem('watchlist', JSON.stringify(watchlist))
+  }, [watchlist])
 
   return (
     <MoviesContext.Provider value={movies}>

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import MovieCard from './MovieCard'
-import { MoviesContext, WatchlistContext } from '../contexts/MoviesContext'
+import { WatchlistContext } from '../contexts/MoviesContext'
 
 const WatchList = () => {
   const watchlist = useContext(WatchlistContext)

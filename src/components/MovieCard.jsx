@@ -29,11 +29,6 @@ const MovieCard = ({ movie, isWatchlist }) => {
     setDetailsLoading(false)
   }
 
-  useEffect(() => {
-    localStorage.setItem('watchlist', JSON.stringify(watchlist))
-  }, [watchlist])
-
-
   if(isWatchlist){
     return (
       <li className='border p-4'>
@@ -62,7 +57,8 @@ const MovieCard = ({ movie, isWatchlist }) => {
         <button 
           className='border px-2 py-1'
           onClick={() => {
-            let flag = false
+
+            /*let flag = false
             watchlist.forEach(element => {
               if(element.imdbID === movieDetails.imdbID){
                 flag = true
@@ -74,6 +70,10 @@ const MovieCard = ({ movie, isWatchlist }) => {
                 ...watchlist,
                 movie
               ])
+            }*/
+
+            if (!watchlist.some(m => m.imdbID === movie.imdbID)) {
+              setWatchlist([...watchlist, movie]);
             }
           }}
         >
