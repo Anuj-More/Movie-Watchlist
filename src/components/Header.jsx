@@ -8,22 +8,30 @@ const Header = () => {
   const [query, setQuery] = useState('')
 
   const searchMovies = async () => {
-    setLoading(true)
+    setLoading('loading')
     
     const API_URL = `https://www.omdbapi.com/?i=tt3896198&apikey=40524c65&s=${query}`
 
     try{
       const response = await fetch(API_URL)
       const data = await response.json()
+
+      console.log(data.Error)
       
       if(data.Search){
         setMovies(data.Search) 
+        setLoading('result')
+      } else if(data.Error === 'Too many results.') {
+        setMovies([])
+        setLoading('too-many-results')
+      } else if(data.Error === 'Movie not found!'){ 
+        setMovies([])
+        setLoading('no-result')
       }
     } catch (error) {
       console.log(error)
     }
 
-    setLoading(false)
 
   }
 

@@ -100,7 +100,7 @@ const MovieCard = ({ movie, isWatchlist }) => {
   } else {
     return (
       <li className='border p-4'>
-        <div>
+        <div className="w-[250px]">
           {movie.Title} ({movie.Year})
         </div>
 
